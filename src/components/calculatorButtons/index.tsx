@@ -122,7 +122,9 @@ const CalculatorButtons: React.FC = () => {
 
   const getHistory = () => {
     const history = getFromLS('calculatorHistory');
-    setCalcHist(history);
+    if (history) {
+      setCalcHist(history);
+    }
   };
 
   useEffect(() => {

@@ -2,7 +2,6 @@
   "name": "calculator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://605a0f6694aa7d5cc31b0a55--infallible-galileo-626382.netlify.app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
