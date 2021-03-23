@@ -1,0 +1,40 @@
+.calculator-history {
+    
+    overflow: auto;
+    width: 350px;
+    max-height: 500px;
+    margin-left: 20px;
+}
+
+.header {
+    display: flex;
+    font-size: x-large;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.calculator-history::-webkit-scrollbar {
+    width: 1em;
+    height: 10px;
+}
+ 
+.calculator-history::-webkit-scrollbar-track {
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+ 
+.calculator-history::-webkit-scrollbar-thumb {
+    border: 6px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    -webkit-border-radius: 120px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 20px;
+}

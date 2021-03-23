@@ -1,0 +1,25 @@
+.button-container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    font-family: 'Noah';
+    height: 50px;
+    border-width: 0px;
+    font-size: larger;
+    font-weight: 700;
+    border-radius: 15px;
+    box-shadow: 8px 8px 10px -2px rgba(34, 60, 80, 0.2),
+                -3px -3px 8px -0px rgba(255, 255, 255, 0.1);
+}
+
+.calc-button {
+    width: 50px;
+}
+
+.default {
+    padding-left: 20px;
+    padding-right: 20px;
+}

@@ -1,25 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { ThemeProvider } from 'styled-components';
+import CalculatorButtons from './components/calculatorButtons';
+import { lightTheme, darkTheme } from './theme/schema';
+import GlobalStyles from './theme/globalStyles';
+import Button from './components/button';
+import { getFromLS, setToLS } from './utils/storage';
 
 function App() {
+  const [theme, setTheme] = useState('');
+
+  const getTheme = () => {
+    const res = getFromLS('theme');
+    if (res) {
+      setTheme(res);
+    } else {
+      setTheme('light');
+    }
+  };
+
+  useEffect(() => {
+    getTheme();
+  }, []);
+
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setToLS('theme', 'dark');
+    } else {
+      setToLS('theme', 'light');
+    }
+    getTheme();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <>
+        <GlobalStyles />
+        <div className="App">
+          <CalculatorButtons />
+          <Button type="default" title="switch themes" onClick={toggleTheme} />
+        </div>
+      </>
+    </ThemeProvider>
   );
 }
 

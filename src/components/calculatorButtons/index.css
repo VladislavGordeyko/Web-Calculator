@@ -1,0 +1,26 @@
+.buttons-container {
+    width: 260px;
+    align-self: center;
+    border-radius: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+.result {
+    margin: 15px 20px 15px 20px;
+    font-size: xx-large;
+    text-align: end;
+    word-wrap: break-word;
+}
+
+.wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.button-flex {
+    flex: 1 0 21%;
+}
