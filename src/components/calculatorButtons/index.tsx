@@ -132,9 +132,9 @@ const CalculatorButtons: React.FC = () => {
 
   useEffect(() => {
     getHistory();
-    const value = getFromLS('currentValue').toString();
+    const value = getFromLS('currentValue');
     if (value) {
-      setResult(value);
+      setResult(value.toString());
     }
   }, []);
 
