@@ -32,7 +32,7 @@ const CalculatorHistoryModal: React.FC<ICalculatorHistoryModalProps> = (
     <div>
       <span className="header">Calculator History</span>
       <div className="calculator-history">
-        {history.length > 0 ? history.map((item) => <p>{`${item.operation} = ${item.result}`}</p>)
+        {history.length > 0 ? history.map((item, idx) => <p key={idx.toString()}>{`${item.operation} = ${item.result}`}</p>)
           : <p>There is no history</p>}
       </div>
       <div className="footer">

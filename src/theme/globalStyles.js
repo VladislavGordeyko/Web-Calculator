@@ -29,7 +29,6 @@ const GlobalStyles = createGlobalStyle`\
 
   .button-operations {
     color: ${({ theme }) => theme.buttonOperations};
-    font-size: x-large;
   };
 
   .ReactModal__Body--open {

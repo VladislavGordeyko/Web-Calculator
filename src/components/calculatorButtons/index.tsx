@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import Button from '../button';
 import './index.css';
@@ -79,26 +80,28 @@ const CalculatorButtons: React.FC = () => {
     }
   };
 
+  const calculateNumbers = (a: string, b: string, operator: string) => {
+    const number = parseFloat(a);
+    const res = Number(calculate(number, parseFloat(b)).toPrecision(10));
+    setResult(res.toString());
+    setSecondNumber('0');
+    setCalcHist([...calcHist, { operation: `${a} ${operator} ${b}`, result: res.toString() }]);
+    setToLS('calculatorHistory', [...calcHist, { operation: `${a} ${operator} ${b}`, result: res.toString() }]);
+    setToLS('currentValue', res);
+  };
+
   const onOperatorPress = (operation: string) => {
     if (operation !== OperationType.equal) {
       setOperationInUse(operation);
+      if (operationInUse && operation !== operationInUse && secondNumber !== '0') {
+        setLastNumber(secondNumber);
+        calculateNumbers(result, secondNumber, operationInUse);
+      }
     } else if (secondNumber !== '0') {
       setLastNumber(secondNumber);
-      const number = parseFloat(result);
-      const res = Number(calculate(number, parseFloat(secondNumber)).toPrecision(10));
-      setResult(res.toString());
-      setSecondNumber('0');
-      setCalcHist([...calcHist, { operation: `${result} ${operationInUse} ${secondNumber}`, result: res.toString() }]);
-      setToLS('calculatorHistory', [...calcHist, { operation: `${result} ${operationInUse} ${secondNumber}`, result: res.toString() }]);
-      setToLS('currentValue', res);
+      calculateNumbers(result, secondNumber, operationInUse);
     } else if (operationInUse) {
-      const number = parseFloat(result);
-      const res = Number(calculate(number, parseFloat(lastNumber)).toPrecision(10));
-      setResult(res.toString());
-      setSecondNumber('0');
-      setCalcHist([...calcHist, { operation: `${result} ${operationInUse} ${lastNumber}`, result: res.toString() }]);
-      setToLS('calculatorHistory', [...calcHist, { operation: `${result} ${operationInUse} ${lastNumber}`, result: res.toString() }]);
-      setToLS('currentValue', res);
+      calculateNumbers(result, lastNumber, operationInUse);
     }
   };
 
@@ -107,14 +110,14 @@ const CalculatorButtons: React.FC = () => {
       if (secondNumber + num !== '00') {
         if (secondNumber === '0') {
           setSecondNumber(num);
-        } else {
+        } else if (secondNumber.length !== 9) {
           setSecondNumber(secondNumber + num);
         }
       }
     } else if (result + num !== '00') {
       if (result === '0') {
         setResult(num);
-      } else {
+      } else if (result.length !== 9) {
         setResult(result + num);
       }
     }
@@ -129,7 +132,7 @@ const CalculatorButtons: React.FC = () => {
 
   useEffect(() => {
     getHistory();
-    const value = getFromLS('currentValue');
+    const value = getFromLS('currentValue').toString();
     if (value) {
       setResult(value);
     }
@@ -143,8 +146,12 @@ const CalculatorButtons: React.FC = () => {
         onClose={() => setIsHistoryShown(false)}
         onHistoryDelete={() => { setToLS('calculatorHistory', []); getHistory(); }}
       />
-      <div className="result">
-        { secondNumber !== '0' ? secondNumber : result }
+      <div className={`
+      result 
+      ${result.length > 9 && 'result-x'}`}
+      >
+        { secondNumber !== '0' ? parseFloat(secondNumber)
+          : (result.length < 9 ? parseFloat(result) : parseFloat(result).toPrecision(9)) }
       </div>
       <div className="wrapper">
         {buttons.map((item) => (
