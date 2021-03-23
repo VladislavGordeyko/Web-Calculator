@@ -1,9 +1,14 @@
 .calculator-history {
-    
     overflow: auto;
-    width: 350px;
+    width: 100%;
     max-height: 500px;
     margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+    .calculator-history{
+        max-height: 250px;
+    }
 }
 
 .header {

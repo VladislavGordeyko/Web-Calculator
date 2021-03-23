@@ -38,6 +38,11 @@ const GlobalStyles = createGlobalStyle`\
 
   .ReactModal__Content--after-open {
     background-color:  ${({ theme }) => theme.button} !important;
+    width: 70%;
+
+    @media (min-width: 768px) {
+      width: 35%;
+    }
   }
   `;
 
